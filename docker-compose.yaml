@@ -1,0 +1,9 @@
+services:
+  
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/app
+    restart: unless-stopped
