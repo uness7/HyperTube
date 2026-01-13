@@ -1,14 +1,13 @@
-FROM node:alpine
+FROM node:22-slim
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY . /usr/src/app
+COPY package*.json ./
 
-RUN npm install -g @angular/cli
+RUN npm ci
 
-RUN npm install
+COPY . .
 
-expose 4200
+EXPOSE 5173
 
-CMD ["ng", "serve", "--host", "0.0.0.0"]
-
+CMD ["npm", "run", "dev", "--host"]
