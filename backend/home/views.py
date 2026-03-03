@@ -1,53 +1,27 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from rest_framework.views import APIView
-from rest_framework.response import Response
-# from SOT import fetch_movies_list
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpRequest, JsonResponse
+from django.http.response import HttpResponse
+from django.views import View
 
-class MovieList(APIView):
-    def get(self, request):
-        dummy = [
-            {
-                "id": "001",
-                "title": "Night Of the Living Dead",
-                "duration": "1h 32 mins",
-                "size": "1.2GB",
-                "thumbnail": "https://archive.org/images/notfound.png",
-            },
-            {
-                "id": "002",
-                "title": "Night Of the Living Dead",
-                "duration": "1h 32 mins",
-                "size": "1.2GB",
-                "thumbnail": "https://archive.org/images/notfound.png",
-            },
-            {
-                "id": "003",
-                "title": "Night Of the Living Dead",
-                "duration": "1h 32 mins",
-                "size": "1.2GB",
-                "thumbnail": "https://archive.org/images/notfound.png",
-            },
-            {
-                "id": "004",
-                "title": "Night Of the Living Dead",
-                "duration": "1h 32 mins",
-                "size": "1.2GB",
-                "thumbnail": "https://archive.org/images/notfound.png",
-            },
-            {
-                "id": "005",
-                "title": "Night Of the Living Dead",
-                "duration": "1h 32 mins",
-                "size": "1.2GB",
-                "thumbnail": "https://archive.org/images/notfound.png",
-            },
-            {
-                "id": "006",
-                "title": "Night Of the Living Dead",
-                "duration": "1h 32 mins",
-                "size": "1.2GB",
-                "thumbnail": "https://archive.org/images/notfound.png",
-            },
-        ]
-        return Response({"results": dummy})
+
+class HomeView(LoginRequiredMixin, View):
+    def get(self, request: HttpRequest) -> HttpResponse:
+        return HttpResponse(
+                """
+                    <h1>Hiiiiiiiiiiiiiiiiiiiiiiiiiiiii</h1>
+
+                    <div>
+                        <form method="POST" action="/api/v1/accounts/logout/">
+
+                        <input type="hidden" name="csrfmiddlewaretoken" value="PASTE_TOKEN_HERE">
+
+                        <button type="submit">Logout</button>
+                        </form>
+                    </div>
+
+
+                """)
+    
+    def post(self, request) -> JsonResponse:
+        print(request)
+        return JsonResponse({"detail": "okay"})

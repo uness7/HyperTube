@@ -28,3 +28,14 @@ dist-ssr
 
 # --- Docker ---
 .docker_volumes/
+
+# Python
+__pycache__/
+*.py[cod]
+
+
+# Testing / type checking
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage*
